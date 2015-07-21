@@ -11,7 +11,7 @@ class VegetablesController < ApplicationController
 
   def new
     @vegetable = Vegetable.new
-    redirect_to vegetables_path
+    
     #added redirection to show all vegetables after creation, we also could keep it showing a newly created veg
   end
 
@@ -19,7 +19,7 @@ class VegetablesController < ApplicationController
     @vegetable = Vegetable.new(whitelisted_vegetable_params)
     if @vegetable.save
       flash[:success] = "That sounds like a tasty vegetable!"
-      redirect_to vegetables_path(@vegetable)
+      redirect_to vegetable_path(@vegetable)
       #path fixed, can't redirect  to instance
     else
       render :new
@@ -44,7 +44,7 @@ class VegetablesController < ApplicationController
       #we need a path here instead of instance to make it work
 
     else
-      flash[:error] = "Something is rotten here..."
+      flash.now[:error] = "Something is rotten here..."
       render :edit
     end
   end
